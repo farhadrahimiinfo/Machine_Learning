@@ -1,0 +1,47 @@
+
+#introduction image
+import matplotlib.pyplot as plt
+import numpy as np
+
+data=plt.imread('./01.jpg')
+plt.imshow(data)
+plt.show()
+data.shape
+
+"""# New Section
+
+# New Section
+"""
+
+data[100,500]
+
+data=np.array(plt.imread('./01.jpg'))
+
+data
+
+data.shape
+
+plt.imshow(data)
+plt.show()
+
+data=np.array(plt.imread('./01.jpg'))
+plt.imshow(data)
+plt.show()
+data[50:125,50:125,:]=0
+plt.imshow(data)
+plt.show()
+
+data=np.array(plt.imread('./01.jpg'))
+data[:,:,0]=0
+data[:,:,2]=0
+plt.imshow(data)
+plt.show()
+
+data=np.array(plt.imread('./01.jpg'))
+plt.imshow(data,cmap='gray')
+plt.show()
+
+data=np.array(plt.imread('./01.jpg'))
+data_gray=data[:,:,0]//3 + data[:,:,1]//3 + data[:,:,0]//3
+plt.imshow(data_gray,cmap='gray')
+plt.show()
