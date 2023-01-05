@@ -1,0 +1,90 @@
+
+import pandas as pd
+
+import numpy as np
+
+!pip install mglearn
+
+import sys
+!{sys.executable} -m pip install mglearn
+
+import mglearn
+
+from sklearn.datasets import load_iris
+iris_dataset=load_iris()
+
+from sklearn.datasets import load_iris
+iris_dataset=load_iris()
+
+print("keys:",iris_dataset.keys())
+
+print(iris_dataset['DESCR'][:193])
+
+print("Target names:",iris_dataset["target_names"])
+
+print("Features name=",iris_dataset["feature_names"])
+
+print("Type of data:",type(iris_dataset["data"]))
+
+print("Shape of data=",iris_dataset["data"].shape)
+
+print("First five rows of data:\n",iris_dataset['data'][:5])
+
+print("Type of target:",type(iris_dataset['target']))
+
+print("Type of target:",type(iris_dataset['target'].shape))
+
+print("Type of target:",iris_dataset['target'].shape)
+
+print("Type of target:",iris_dataset['target'])
+
+#Measururing Success: Training and Testing Data
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(iris_dataset['data'],iris_dataset['target'],random_state=0)
+
+print("x_train shape=",x_train.shape)
+print("y_train=",y_train.shape)
+
+print("x_test shape=",x_test.shape)
+print("y_test=",y_test.shape)
+
+#create dataframe from data in x_train
+#lable the columns using the strings in Iris_dataset.feature_name
+iris_dataframe=pd.DataFrame(x_train,columns=iris_dataset.feature_names)
+#create a scotter matrix  from the dataframe, color by y_train
+#                           marker='o',hist_kwds=['bins':20],s=60
+#                           alpha=.8,cmap=mglearn.cm3)
+
+iris_dataframe
+
+#building your first model: k-Nearest neighbors
+from sklearn.neighbors import KNeighborsClassifier
+knn=KNeighborsClassifier(n_neighbors=1)
+
+knn.fit(x_train,y_train)#
+
+#making predictions
+x_new=np.array([[5,2.9,1,0.2]])
+print("x_new.shape=",x_new.shape)
+
+from pandas.core.arrays.interval import intervals_to_interval_bounds
+prediction=knn.predict(x_new)
+print("pridiction=",prediction)
+print("pridiction target name=",iris_dataset['target_names'][prediction])
+
+#Evaluating the model
+y_pred=knn.predict(x_test)
+print("Test set predictions:\n",y_pred)
+
+y_test
+
+y_pred==y_test
+
+np.sum(y_pred==y_test)#true
+
+np.sum(y_pred==y_test)/len(y_pred)
+
+print("Test set score={:.2f}".format(np.mean(y_pred==y_test)))
+
+print("Test set score={:.2f}".format(knn.score(x_test,y_test)))
